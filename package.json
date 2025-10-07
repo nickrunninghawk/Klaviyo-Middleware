@@ -11,6 +11,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "standardwebhooks": "^1.0.0"
   }
 }
