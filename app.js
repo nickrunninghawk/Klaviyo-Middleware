@@ -14,7 +14,7 @@ app.get("/", express.raw({ type: "*/*" }), (_, res) => {
 });
 app.get("/health", (_, res) => res.send("ok"));
 
-app.post("/klaviyo", express.raw({ type: "*/*" }), (req, res) => {
+app.post("/klaviyo", (req, res) => {
     // Process the webhook payload here 
     console.log("Received Klaviyo webhook:", req.body);
     console.log("Headers:", req.headers);
