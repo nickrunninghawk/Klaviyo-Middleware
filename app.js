@@ -18,7 +18,8 @@ app.post("/klaviyo", express.raw({ type: "*/*" }), (req, res) => {
     // Process the webhook payload here 
     console.log("Received Klaviyo webhook:", req.body);
     console.log("Headers:", req.headers);
-    const isVerified = webhook.verify(req.headers, req.body)
+
+    const isVerified = webhook.verify(req.body, req.headers)
     console.log("Webhook verified:", isVerified);
 
 
