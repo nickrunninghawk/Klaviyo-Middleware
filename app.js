@@ -3,6 +3,7 @@
 import express from "express";
 import { Webhook } from "standardwebhooks";
 import bodyParser from "body-parser";
+import { sendKlaviyoEvent } from "./api.js";
 
 const CLIENT_SECRET = "4a4f15c9e88d77553dbaa18bf101cc9ba6f5fce8bbba9c2f86f6984fac0ae074";
 
