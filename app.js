@@ -2,14 +2,11 @@
 
 import express from "express";
 import { Webhook } from "standardwebhooks";
-import bodyParser from "body-parser";
 import { sendKlaviyoEvent } from "./api.js";
 
 const CLIENT_SECRET = "4a4f15c9e88d77553dbaa18bf101cc9ba6f5fce8bbba9c2f86f6984fac0ae074";
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 const webhook = new Webhook(Buffer.from(CLIENT_SECRET, "utf8").toString("base64"));
 
