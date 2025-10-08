@@ -13,22 +13,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const webhook = new Webhook(Buffer.from(CLIENT_SECRET, "utf8").toString("base64"));
 
 // Simple routes
-app.get("/", express.raw({ type: "*/*" }), (_, res) => {
-
+app.get("/", (_, res) => {
     res.send("Hello from Render 🚀")
 });
+
 app.get("/health", (_, res) => res.send("ok"));
 
-app.post("/klaviyo", (req, res) => {
+app.post("/klaviyo",  express.raw({ type: "*/*" }), (req, res) => {
     // Process the webhook payload here 
     console.log("Received Klaviyo webhook:", req.body);
     console.log("Headers:", req.headers);
+    let data;
+    try {
+        data = webhook.verify(req.body, req.headers).data
+        console.log("Webhook verified:", data);
+    } catch {
+        console.error("Webhook verification failed");
+        return res.status(401).send("Unauthorized");
+    }
 
-    const isVerified = webhook.verify(req.body, req.headers)
-    console.log("Webhook verified:", isVerified);
-
-
+    sendKlaviyoEvent({
+        metricName: "Partially Shipped",
+        email: "nickrunninghawk@gmail.com",
+    })
     res.status(200).send("Webhook received");
+
 });
 
 // Render provides PORT as an environment variable.
