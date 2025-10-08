@@ -29,11 +29,16 @@ app.post("/klaviyo",  express.raw({ type: "*/*" }), (req, res) => {
         console.error("Webhook verification failed");
         return res.status(401).send("Unauthorized");
     }
+    try {
+        sendKlaviyoEvent({
+            metricName: "Partially Shipped",
+            email: "nickrunninghawk@gmail.com",
+        })
+    } catch (error) {
+        console.log("Error sending Klaviyo event");
+        return res.status(500).send("Error sending Klaviyo event");
+    }
 
-    sendKlaviyoEvent({
-        metricName: "Partially Shipped",
-        email: "nickrunninghawk@gmail.com",
-    })
     res.status(200).send("Webhook received");
 
 });
