@@ -25,7 +25,7 @@ app.post("/klaviyo",  express.raw({ type: "*/*" }), (req, res) => {
     console.log("Headers:", req.headers);
     let data;
     try {
-        data = webhook.verify(req.body, req.headers).data
+        data = webhook.verify(req.body, req.headers)
         console.log("Webhook verified:", data);
     } catch {
         console.error("Webhook verification failed");
