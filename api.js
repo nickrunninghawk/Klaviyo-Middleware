@@ -3,7 +3,7 @@ import axios from "axios";
 const klaviyoAPI = axios.create({
   baseURL: "https://a.klaviyo.com/api",
   headers: {
-    Authorization: `Klaviyo-API-Key pk_f4a5634dc47ec96704dc0c69417f622aad`,
+    Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_API_KEY}`,
     accept: "application/vnd.api+json",
     "content-type": "application/vnd.api+json",
     revision: "2025-07-15",
