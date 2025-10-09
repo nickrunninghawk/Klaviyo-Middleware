@@ -36,6 +36,7 @@ export async function sendKlaviyoEvent({
 
   try {
     const { data } = await klaviyoAPI.post("/events", body);
+    console.log("Klaviyo event sent:", data);
     return data; // contains the created event
   } catch (err) {
     // Helpful debugging
